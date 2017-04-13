@@ -1,0 +1,51 @@
+[1mdiff --git a/functional_tests.py b/functional_tests.py[m
+[1mindex f792696..2bd6c47 100644[m
+[1m--- a/functional_tests.py[m
+[1m+++ b/functional_tests.py[m
+[36m@@ -1,5 +1,7 @@[m
+ from selenium import webdriver[m
+[32m+[m[32mfrom selenium.webdriver.common.keys import Keys[m
+ import unittest[m
+[32m+[m[32mimport time[m
+ [m
+ [m
+ class NewVisitorTest(unittest.TestCase):[m
+[36m@@ -18,17 +20,33 @@[m [mclass NewVisitorTest(unittest.TestCase):[m
+ [m
+ 		#She notices the page title and header mention to-do lists[m
+ 		self.assertIn('To-Do', self.browser.title)[m
+[31m-		self.fail('Finish the test!')[m
+[32m+[m		[32mheader_text = self.browser.find_element_by_tag_name('h1').text[m
+[32m+[m		[32mself.assertIn('To-Do', header_text)[m
+ [m
+ 		#She is invited to enter a to-do item straight away[m
+[31m-[m
+[32m+[m		[32minputbox = self.browser.find_element_by_id('id_new_item')[m
+[32m+[m		[32mself.assertEqual([m
+[32m+[m			[32minputbox.get_attribute('placeholder'),[m[41m [m
+[32m+[m			[32m'Enter a to-do item'[m
+[32m+[m		[32m)[m
+[32m+[m[41m		[m
+ 		#She types "Buy paper hearts" into a text box[m
+[31m-[m
+[32m+[m		[32minputbox.send_keys('Buy paper hearts')[m
+[32m+[m[41m		[m
+ 		#When she hits enter, the page updates, and now the page lists:[m
+ 		# "1: Buy paper hearts" as an item in a to-do list[m
+[31m-[m
+[31m-		#There is still a text boc inviting ger to add another item[m
+[32m+[m		[32minputbox.send_keys(Keys.ENTER)[m
+[32m+[m		[32mtime.sleep(1)[m
+[32m+[m
+[32m+[m		[32mtable = self.browser.find_element_by_id('id_list_table')[m
+[32m+[m		[32mrows = table.find_elements_by_tag_name('tr')[m
+[32m+[m		[32mself.assertTrue([m
+[32m+[m			[32many(row.text == '1: Buy paper hearts' for row in rows)[m
+[32m+[m		[32m)[m
+[32m+[m[41m		[m
+[32m+[m		[32m#There is still a text box inviting ger to add another item[m
+ 		#She enters "Use paper hearts in scrapbook"[m
+[32m+[m		[32mself.fail('Finish the test!')[m
+ [m
+ 		#The page updates again, and now shows both items on her list[m
+ [m
