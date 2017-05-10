@@ -5,7 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
 import time
 
-MAX_WAIT = 10
+MAX_WAIT = 5
 
 class NewVisitorTest(LiveServerTestCase):
 
@@ -87,7 +87,7 @@ class NewVisitorTest(LiveServerTestCase):
 		self.browser.get(self.live_server_url)
 		page_text = self.browser.find_element_by_tag_name('body').text
 		self.assertNotIn('Buy paper hearts', page_text)
-		self.asserNotIn('paper hearts in scrapbook', page_text)
+		self.assertNotIn('paper hearts in scrapbook', page_text)
 		
 		#Avichai starts a new list by entering a new item.
 		inputbox = self.browser.find_element_by_id('id_new_item')
