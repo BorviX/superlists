@@ -13,7 +13,6 @@ class HomePageTest(TestCase):
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home.html')
 
-
 class ListViewTest(TestCase):
     
     def test_uses_list_template(self):
@@ -70,8 +69,7 @@ class ListAndItemModelsTest(TestCase):
         self.assertEqual(first_saved_item.list, list_)
         self.assertEqual(second_saved_item.text, 'Item the second')
         self.assertEqual(second_saved_item.list, list_)
-        
-        
+                
 class NewListTest(TestCase):        
                 
     def test_can_save_a_POST_request(self):
